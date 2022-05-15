@@ -4,17 +4,16 @@ import { Chart } from '@common/Chart';
 import Link from 'next/link';
 import { deleteProduct } from '@services/api/products';
 import { XCircleIcon } from '@heroicons/react/solid';
+import useAlert from '@hooks/useAlert';
 const LIMIT = 20;
 const OFFSET = 5;
 
 export default function Dashboard() {
-  
-
-
+  const { setAlert } = useAlert();
   const products = useFetch(endPoints.products.getProducts(LIMIT, OFFSET));
-  const categoryNames = products?.map((product)=>product.category);
+  const categoryNames = products?.map((product) => product.category);
   const categoryCount = categoryNames?.map((category) => category.name);
-  const countOcurrences = (arr) => arr.reduce((prev,curr) => (prev[curr] = ++prev[curr] || 1,prev),{});
+  const countOcurrences = (arr) => arr.reduce((prev, curr) => ((prev[curr] = ++prev[curr] || 1), prev), {});
 
   const handleDelete = (id) => {
     deleteProduct(id)
@@ -35,7 +34,6 @@ export default function Dashboard() {
         });
       });
   };
-
 
   const data = {
     datasets: [
@@ -96,14 +94,12 @@ export default function Dashboard() {
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.id}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <Link href={`/dashboard/edit/${product.id}`}>
-                        <span className="text-indigo-600 hover:text-indigo-900 cursor-pointer">
-                          Edit
-                        </span>
+                          <span className="text-indigo-600 hover:text-indigo-900 cursor-pointer">Edit</span>
                         </Link>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                        <XCircleIcon className="flex-shrink-0 h-6 w-6 text-gray-400 cursor-pointer" aria-hidden="true" onClick={() => handleDelete(product.id)} />
+                        <a href={'/index'} className="text-indigo-600 hover:text-indigo-900">
+                          <XCircleIcon className="flex-shrink-0 h-6 w-6 text-gray-400 cursor-pointer" aria-hidden="true" onClick={() => handleDelete(product.id)} />
                         </a>
                       </td>
                     </tr>

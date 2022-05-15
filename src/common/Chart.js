@@ -7,19 +7,19 @@ export const Chart = ({ chartData }) => {
   return (
     <>
       <Bar
-        data ={chartData}
+        data={chartData}
         options={{
           title: {
             display: true,
             text: 'Category',
             fontSize: 20,
           },
-          plugins:{
+          plugins: {
             legend: {
-                display: true,
-                position: 'right',
-              },
-          }
+              display: true,
+              position: 'right',
+            },
+          },
         }}
       />
     </>

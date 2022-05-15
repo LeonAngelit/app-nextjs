@@ -10,8 +10,6 @@ import { deleteProduct } from '@services/api/products';
 import Link from 'next/link';
 
 export default function Products() {
-
-
   const { alert, setAlert, toggleAlert } = useAlert({});
   useEffect(() => {
     async function getProducts() {
@@ -114,14 +112,12 @@ export default function Products() {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.id}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <Link href={`/dashboard/edit/${product.id}`}>
-                        <span className="text-indigo-600 hover:text-indigo-900 cursor-pointer">
-                          Edit
-                        </span>
+                        <Link href={`/dashboard/edit/${product.id}`}>
+                          <span className="text-indigo-600 hover:text-indigo-900 cursor-pointer">Edit</span>
                         </Link>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="#" className="text-indigo-600 hover:text-indigo-900">
+                        <a href={'/dashboard/products'} className="text-indigo-600 hover:text-indigo-900">
                           <XCircleIcon className="flex-shrink-0 h-6 w-6 text-gray-400 cursor-pointer" aria-hidden="true" onClick={() => handleDelete(product.id)} />
                         </a>
                       </td>
@@ -134,7 +130,7 @@ export default function Products() {
         </div>
       </div>
       <Modal open={open} setOpen={setOpen}>
-        <FormProduct setOpen={setOpen} setAlerta={setAlert}/>
+        <FormProduct setOpen={setOpen} setAlerta={setAlert} />
       </Modal>
     </>
   );
